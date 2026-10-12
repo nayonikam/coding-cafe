@@ -1,57 +1,43 @@
-# Lab 4: Git & GitHub — Answers
+# Lab 4: Git & GitHub - Notes & Answers
 
-## Question 1: What did `--global` mean here? What would happen if you left it out?
+### Question 1
+The `--global` flag saves your configuration settings in your global user profile (`~/.gitconfig`), applying them to all Git repositories on your computer. If you left it out, the setting would only apply to the current repository, and Git would require you to configure your identity separately for every new project.
 
-The `--global` option sets my name and email for all Git repositories belonging to my user account. If I leave it out, the setting is normally applied only to the current repository, provided I am inside one.
+### Question 2
+The hidden `.git` directory appeared in `ls -a` but not in standard `ls`. It contains Git’s internal database, object store, configuration files, and reference logs that power the repository's version control history.
 
-## Question 2: What appeared in `ls -a` but not in `ls`? What is inside it?
+### Question 3
+Git offered to track dozens of files and folders across the directory, including virtual environment files like `.venv/`. Files inside `.venv/` and `__pycache__/` are generated automatically by Python and package managers rather than code written by you.
 
-The `.git` directory appeared in `ls -a` but not in `ls` because it is a hidden directory. It contains Git's internal data, including information used to manage the repository's commits, branches and configuration.
+### Question 4
+After creating and populating `.gitignore`, all the files and folders specified inside it (such as `.venv/` and `__pycache__/`) completely disappeared from the untracked files list in `git status`.
 
-## Question 3: Roughly how many files and folders is Git offering to track? Does anything in that list look like something you did not write?
+### Question 5
+`.gitignore` should be committed because it contains project-wide configuration rules that your collaborators and TAs also need in their local environments. If it were ignored, Git would not track the rules telling it what to ignore, preventing others from sharing those exclusions.
 
-Git lists the files and folders that are currently untracked in my repository. Some entries, such as files inside `.venv/` and `__pycache__/`, are generated or installed files rather than files I created myself.
+### Question 6
+`README.md` moved from "Changes not staged for commit" (untracked) to "Changes to be committed" (staged). In the three-places model, the file moved from your working directory into the staging area (index).
 
-## Question 4: Compare this `git status` with the one from Question 3. What disappeared?
+### Question 7
+Git printed the branch name, the abbreviated commit hash, your commit message, and a summary line indicating how many files changed along with the total number of insertions and deletions.
 
-After creating `.gitignore`, files and folders matching its rules, such as `.venv/`, `__pycache__/` and files ending in `.pyc`, no longer appear as untracked files. This keeps unnecessary files out of the repository.
+### Question 8
+The first seven characters are the short commit hash (derived from a SHA-1 checksum). They serve as a compact, unique identifier to reference that specific commit within the repository's history.
 
-## Question 5: Should `.gitignore` itself be committed, or ignored too? Why?
+### Question 9
+The four steps of the iterative Git loop are: (1) edit your files, (2) check status using `git status`, (3) stage your changes using `git add`, and (4) commit your changes using `git commit`.
 
-The `.gitignore` file itself should be committed because it contains rules specifying which files Git should ignore. Committing it allows other people working on the project to follow the same rules.
+### Question 10
+`README.md` gets a special name and root placement because platforms like GitHub automatically look for and render it as the front-page overview of the repository. This gives visitors and TAs an immediate, readable summary of what the project contains.
 
-## Question 6: `README.md` moved from one heading to another in `git status`. Which two? What just happened to it?
+### Question 11
+`gh auth login` authenticates your GitHub CLI tool and securely stores an OAuth token on your machine. This token authorizes your local Git client to communicate with GitHub without prompting you for a password on every push.
 
-`README.md` moved from the "Untracked files" section to the "Changes to be committed" section. Running `git add README.md` moved it into the staging area, where it was prepared for the next commit.
+### Question 12
+The rendered contents of `README.md` are displayed on the repository's front page because GitHub automatically detects and renders standard markdown README files at the root level.
 
-## Question 7: What did Git print after the commit? How many files did it say changed?
+### Question 13
+No, pushing your commits to GitHub does not alter your local commit history in any way; it merely uploads and synchronizes your local history with the remote repository.
 
-After the commit, Git displayed information about the new commit, including its identifier and a summary of the changes. The number of files changed is the number reported in my terminal after running `git commit`.
-
-## Question 8: What are the first seven characters of your commit called, and what are they for?
-
-The first seven characters of a commit's identifier are called the short commit hash. They provide a convenient way to identify a particular commit without writing its full hash.
-
-## Question 9: You now have two commits. What are the four steps of the loop you just did twice?
-
-The four steps are edit, stage, commit and check. I edit the files, stage the changes using `git add`, save them using `git commit`, and check the result using commands such as `git status` or `git log --oneline`.
-
-## Question 10: Why does this file get a special name and a special place, rather than being called `notes.md`?
-
-The `README.md` file has a special name because GitHub automatically displays it on the repository's main page. It provides an introduction to the project and helps visitors understand its purpose and contents.
-
-## Question 11: What did `gh auth login` do that means you will not be asked for a password when you push?
-
-The `gh auth login` command authenticated my GitHub account through the GitHub CLI and configured the credentials used for Git operations. This allows Git to authenticate future pushes without requiring me to enter my GitHub account password each time.
-
-## Question 12: Refresh the repository page on GitHub. What is showing on the front page, and why that file?
-
-The repository page displays my project files and shows the contents of `README.md` as formatted text. GitHub automatically renders README files on the repository's main page so visitors can understand the project.
-
-## Question 13: Run `git log --oneline` again. Did pushing change your local history in any way?
-
-No, pushing did not change my local commit history. The `git push` command uploaded my existing commits to GitHub, while my local history remained unchanged.
-
-## Question 14: Your repository is private but your TAs can now read it. What is the difference between a private repository and no repository on GitHub at all?
-
-A private repository exists on GitHub but can only be accessed by its owner and people who have been granted permission. If a repository does not exist on GitHub, there is no online repository for collaborators to access.
+### Question 14
+A private repository exists on GitHub with restricted permissions so that only you and explicitly invited collaborators (such as your TAs) can view or clone it. A repository that does not exist at all has no remote presence on GitHub, offering no cloud backup or remote collaboration capability.
